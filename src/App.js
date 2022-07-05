@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Cart from "./pages/cart";
 import Home from "./pages/home";
 import Login from "./pages/login";
 import Product from "./pages/product";
@@ -18,6 +19,7 @@ const App = () => {
           <Route path="register" element={<Register />} />
           <Route path="login" element={<Login />} />
         </Route>
+        <Route path="cart" element={<Cart />} />
       </Routes>
     </BrowserRouter>
   );
