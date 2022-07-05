@@ -132,7 +132,7 @@ const Product = () => {
           <Price>$ 20</Price>
           <FilterContainer>
             <Filter>
-              <FilterTitle>Color</FilterTitle>
+              <FilterTitle>Color:</FilterTitle>
               <FilterColor color="black" />
               <FilterColor color="darkblue" />
               <FilterColor color="gray" />
