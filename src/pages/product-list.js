@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Announcement from "../components/Announcement";
+import Footer from "../components/Footer";
 import Navbar from "../components/navbar";
 import Newslaetter from "../components/Newslaetter";
 import Products from "../components/Products";
@@ -73,6 +74,7 @@ const ProductList = () => {
       </FilterContainer>
       <Products />
       <Newslaetter />
+      <Footer />
     </Container>
   );
 };
