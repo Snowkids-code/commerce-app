@@ -124,6 +124,9 @@ const Product = () => {
   const id = location.pathname.split("/")[2];
 
   const [product, setProduct] = useState({});
+  const [quantity, setQuantity] = useState(1);
+  const [color, setColor] = useState("");
+  const [size, setSize] = useState("");
 
   useEffect(() => {
     const getProducts = async () => {
@@ -135,6 +138,11 @@ const Product = () => {
 
     getProducts();
   }, [id]);
+
+  const handleClick = () => {
+    
+  }
+
   return (
     <Container>
       <Navbar />
@@ -151,25 +159,33 @@ const Product = () => {
             <Filter>
               <FilterTitle>Color:</FilterTitle>
               {product.color?.map((c) => (
-                <FilterColor color={c} key={c} />
+                <FilterColor color={c} key={c} onClick={() => setColor(c)} />
               ))}
             </Filter>
             <Filter>
               <FilterTitle>Size</FilterTitle>
               <FilterSize>
                 {product.size?.map((s) => (
-                  <FilterSizeOption key={s}>{s}</FilterSizeOption>
+                  <FilterSizeOption key={s} onChange={(e) => setSize(e.target.value)}>
+                    {s}
+                  </FilterSizeOption>
                 ))}
               </FilterSize>
             </Filter>
           </FilterContainer>
           <AddContainer>
             <AmountContainer>
-              <Remove />
-              <Amount>1</Amount>
-              <Add />
+              <Remove
+                onClick={() => (quantity < 2 ? "1" : setQuantity(quantity - 1))}
+              />
+              <Amount>{quantity}</Amount>
+              <Add
+                onClick={() =>
+                  quantity > 9 ? "10" : setQuantity(quantity + 1)
+                }
+              />
             </AmountContainer>
-            <Button>ADD TO CART</Button>
+            <Button onClick={handleClick}>ADD TO CART</Button>
           </AddContainer>
         </InfoContainer>
       </Wrapper>
