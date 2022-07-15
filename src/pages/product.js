@@ -143,7 +143,7 @@ const Product = () => {
   }, [id]);
 
   const handleClick = () => {
-    dispatch(addProduct({ product, quantity }));
+    dispatch(addProduct({ ...product, quantity, color, size }));
   };
 
   return (
@@ -167,14 +167,9 @@ const Product = () => {
             </Filter>
             <Filter>
               <FilterTitle>Size</FilterTitle>
-              <FilterSize>
+              <FilterSize onChange={(e) => setSize(e.target.value)}>
                 {product.size?.map((s) => (
-                  <FilterSizeOption
-                    key={s}
-                    onChange={(e) => setSize(e.target.value)}
-                  >
-                    {s}
-                  </FilterSizeOption>
+                  <FilterSizeOption key={s}>{s}</FilterSizeOption>
                 ))}
               </FilterSize>
             </Filter>
