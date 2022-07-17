@@ -8,7 +8,8 @@ import Footer from "../components/Footer";
 import Navbar from "../components/navbar";
 import { mobile } from "../responisve";
 import StripeCheckout from "react-stripe-checkout";
-import { publicRequest } from "../requestMethods";
+import { userRequest } from "../requestMethods";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div``;
 
@@ -163,6 +164,7 @@ const Cart = () => {
     process.env.STRIPE_KEY;
   const cart = useSelector((state) => state.cart);
   const [stripeToken, setStripeToken] = useState(null);
+  const navigate = useNavigate();
 
   const onToken = (token) => {
     setStripeToken(token);
@@ -170,14 +172,14 @@ const Cart = () => {
 
   useEffect(() => {
     const sendInfo = async () => {
-      const res = await publicRequest.post("/checkout/payment", {
+      const res = await userRequest.post("/checkout/payment", {
         tokenId: stripeToken.id,
         amount: cart.total * 100,
       });
-      console.log(res.data);
+      navigate.push("/success");
     };
     stripeToken && sendInfo();
-  }, [stripeToken]);
+  }, [stripeToken, cart.total, navigate]);
   return (
     <Container>
       <Navbar />
@@ -246,7 +248,7 @@ const Cart = () => {
               <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
             </SummaryItem>
             <StripeCheckout
-              name="Lama Shop"
+              name="Phoenix Shop"
               image="https://avatars.githubusercontent.com/u/1486366?v=4"
               billingAddress
               shippingAddress
